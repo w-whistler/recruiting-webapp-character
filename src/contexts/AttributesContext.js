@@ -25,29 +25,37 @@ function AttributesProvider({ children }) {
 
   useEffect(() => {
     const getCharacter = async () => {
-      const res = await axios.get(`/${USERNAME}/character`);
+      try {
+        const res = await axios.get(`/${USERNAME}/character`);
 
-      const attrPoints = res.data?.body?.attributePoints;
+        const attrPoints = res.data?.body?.attributePoints;
 
-      if (attrPoints) {
-        setAttributePoints(attrPoints);
+        if (attrPoints) {
+          setAttributePoints(attrPoints);
 
-        setAvailableSkills(
-          10 + Math.max(0, getModifiers(attrPoints.Intelligence)) * 4,
-        );
+          setAvailableSkills(
+            10 + Math.max(0, getModifiers(attrPoints.Intelligence)) * 4,
+          );
+        }
+
+        setSkillPoints(res.data?.body?.skillPoints || {});
+      } catch (error) {
+        // TODO: Error handling
       }
-
-      setSkillPoints(res.data?.body?.skillPoints || {});
     };
 
     getCharacter();
   }, []);
 
   const onUpdateCharacter = useCallback(async () => {
-    await axios.post(`/${USERNAME}/character`, {
-      attributePoints,
-      skillPoints,
-    });
+    try {
+      await axios.post(`/${USERNAME}/character`, {
+        attributePoints,
+        skillPoints,
+      });
+    } catch (error) {
+      // TODO: Error handling
+    }
   }, [attributePoints, skillPoints]);
 
   const onChangeAttributePoint = useCallback(
