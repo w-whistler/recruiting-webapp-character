@@ -5,9 +5,13 @@ function getModifiers(points) {
 }
 
 function initializeAttributePoints() {
-  return ATTRIBUTE_LIST.reduce((attribute) => ({
-    [attribute]: 10,
-  }));
+  return ATTRIBUTE_LIST.reduce(
+    (prev, attribute) => ({
+      ...prev,
+      [attribute]: 10,
+    }),
+    {},
+  );
 }
 
 export { getModifiers, initializeAttributePoints };
