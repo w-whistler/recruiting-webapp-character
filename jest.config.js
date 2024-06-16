@@ -1,13 +1,16 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  testMatch: ['**/*.test.js'],
+  testMatch: ['**/*.test.js', '**/*.test.jsx'],
   collectCoverage: true,
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
-    '**/*.{js,jsx}',
+    'src/**/*.{js,jsx}',
     '!**/node_modules/**',
     '!**/coverage/**',
+    '!<rootDir>/*.js',
   ],
+  moduleFileExtensions: ['js', 'jsx'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/[^/]+\\.js$'],
   transform: {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },

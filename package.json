@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest test",
+    "test": "jest test --watch",
     "eject": "react-scripts eject",
     "fix": "npm run fix-formatting && npm run fix-lint",
     "fix-lint": "npx eslint --fix './**/*.{js,jsx}'",
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "babel-jest": "^29.7.0",
